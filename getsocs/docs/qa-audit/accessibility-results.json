@@ -1,0 +1,362 @@
+[
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 59
+      }
+    ],
+    "passes": 24
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/products",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ],
+    "passes": 22
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/policy",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 31
+      }
+    ],
+    "passes": 21
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/login",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/register",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 28
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "dark",
+    "width": 375,
+    "route": "/reset-password",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ],
+    "passes": 18
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 67
+      }
+    ],
+    "passes": 23
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/products",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 47
+      }
+    ],
+    "passes": 21
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/policy",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ],
+    "passes": 22
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/login",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/register",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 25
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "dark",
+    "width": 1366,
+    "route": "/reset-password",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ],
+    "passes": 18
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 44
+      }
+    ],
+    "passes": 24
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/products",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 25
+      }
+    ],
+    "passes": 22
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/policy",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 31
+      }
+    ],
+    "passes": 21
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/login",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/register",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 28
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "light",
+    "width": 375,
+    "route": "/reset-password",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ],
+    "passes": 18
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 51
+      }
+    ],
+    "passes": 24
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/products",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 32
+      }
+    ],
+    "passes": 22
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/policy",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 38
+      }
+    ],
+    "passes": 23
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/login",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/register",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 25
+      }
+    ],
+    "passes": 19
+  },
+  {
+    "theme": "light",
+    "width": 1366,
+    "route": "/reset-password",
+    "version": "4.13.0",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ],
+    "passes": 18
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "scenario": "same-ip",
+    "status": 401
+  },
+  {
+    "scenario": "same-ip",
+    "status": 401
+  },
+  {
+    "scenario": "same-ip",
+    "status": 401
+  },
+  {
+    "scenario": "same-ip",
+    "status": 429,
+    "retryAfter": "900"
+  },
+  {
+    "scenario": "same-ip",
+    "status": 429,
+    "retryAfter": "900"
+  },
+  {
+    "scenario": "rotating-forwarded-ip",
+    "status": 401
+  },
+  {
+    "scenario": "rotating-forwarded-ip",
+    "status": 401
+  },
+  {
+    "scenario": "rotating-forwarded-ip",
+    "status": 401
+  },
+  {
+    "scenario": "rotating-forwarded-ip",
+    "status": 401
+  },
+  {
+    "scenario": "rotating-forwarded-ip",
+    "status": 401
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "worker": "a",
+    "status": 200,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "2",
+      "ratelimit-reset": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "11",
+      "etag": "W/\"b-Ai2R8hgEarLmHKwesT1qcY913ys\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    },
+    "body": {
+      "ok": true
+    }
+  },
+  {
+    "worker": "a",
+    "status": 200,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "1",
+      "ratelimit-reset": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "11",
+      "etag": "W/\"b-Ai2R8hgEarLmHKwesT1qcY913ys\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    },
+    "body": {
+      "ok": true
+    }
+  },
+  {
+    "worker": "a",
+    "status": 200,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "0",
+      "ratelimit-reset": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "11",
+      "etag": "W/\"b-Ai2R8hgEarLmHKwesT1qcY913ys\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    },
+    "body": {
+      "ok": true
+    }
+  },
+  {
+    "worker": "a",
+    "status": 429,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "0",
+      "ratelimit-reset": "900",
+      "retry-after": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "101",
+      "etag": "W/\"65-AKXunMRPhDf561Q7A2S5WW9pocQ\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    },
+    "body": {
+      "success": false,
+      "error": "Too many login attempts. Please try again in 15 minutes.",
+      "retryAfter": 900
+    }
+  },
+  {
+    "worker": "a",
+    "status": 429,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "0",
+      "ratelimit-reset": "900",
+      "retry-after": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "101",
+      "etag": "W/\"65-AKXunMRPhDf561Q7A2S5WW9pocQ\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    },
+    "body": {
+      "success": false,
+      "error": "Too many login attempts. Please try again in 15 minutes.",
+      "retryAfter": 900
+    }
+  },
+  {
+    "worker": "a",
+    "ip": "192.0.2.11",
+    "status": 200,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "2",
+      "ratelimit-reset": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "11",
+      "etag": "W/\"b-Ai2R8hgEarLmHKwesT1qcY913ys\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    }
+  },
+  {
+    "worker": "b",
+    "ip": "192.0.2.10",
+    "status": 200,
+    "headers": {
+      "x-powered-by": "Express",
+      "ratelimit-policy": "3;w=900",
+      "ratelimit-limit": "3",
+      "ratelimit-remaining": "2",
+      "ratelimit-reset": "900",
+      "content-type": "application/json; charset=utf-8",
+      "content-length": "11",
+      "etag": "W/\"b-Ai2R8hgEarLmHKwesT1qcY913ys\"",
+      "date": "Sun, 06 Sep 2026 04:29:14 GMT",
+      "connection": "close"
+    }
+  }
+]

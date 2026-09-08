@@ -1,0 +1,146 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: server } }
+    env:
+      NODE_ENV: test
+      TEST_DB_FILE: server.test.json
+      JWT_SECRET: ci-only-secret-that-is-at-least-32-characters-long
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: server/package-lock.json }
+      - run: npm install --no-audit --no-fund
+      - run: npm test -- --coverage
+      - run: npm audit --omit=dev --audit-level=high
+
+  mysql-integration:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: getsocs_db
+          MYSQL_USER: getsocs
+          MYSQL_PASSWORD: ci-mysql-password
+          MYSQL_ROOT_PASSWORD: ci-root-password
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pci-root-password --silent"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    defaults: { run: { working-directory: server } }
+    env:
+      NODE_ENV: production
+      JWT_SECRET: ci-only-secret-that-is-at-least-32-characters-long
+      ALLOWED_ORIGINS: http://127.0.0.1:3001
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_NAME: getsocs_db
+      DB_USER: getsocs
+      DB_PASS: ci-mysql-password
+      REDIS_ENABLED: "false"
+      METRICS_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: server/package-lock.json }
+      - run: npm install --no-audit --no-fund
+      - name: Bootstrap MySQL schema
+        run: npm run db:bootstrap
+      - name: Verify MySQL schema
+        run: npm run db:verify
+      - name: Smoke start against MySQL
+        run: |
+          node server.js > /tmp/getsocs.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3001/health > /tmp/health.json; then
+              cat /tmp/health.json
+              grep -q '"driver":"mysql"' /tmp/health.json
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/getsocs.log
+          exit 1
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: client } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run typecheck:services
+      - run: CI=true npm test -- --watchAll=false --coverage
+      - run: npm run build
+      - run: npm audit --omit=dev --audit-level=high
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --no-audit --no-fund
+        working-directory: server
+      - run: npm ci
+        working-directory: client
+      - run: npm ci
+        working-directory: e2e
+      - run: npx playwright install --with-deps chromium
+        working-directory: e2e
+      - run: npm test
+        working-directory: e2e
+
+  container-smoke:
+    runs-on: ubuntu-latest
+    needs: [mysql-integration, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start stack
+        env:
+          DB_NAME: getsocs_db
+          DB_USER: getsocs
+          DB_PASS: container-mysql-password
+          MYSQL_ROOT_PASSWORD: container-root-password
+          JWT_SECRET: container-smoke-secret-that-is-at-least-32-characters
+          ALLOWED_ORIGINS: http://127.0.0.1:3001
+          METRICS_TOKEN: container-smoke-metrics-token-123456789
+        run: |
+          cp server/.env.example server/.env
+          cat >> server/.env <<EOF
+          JWT_SECRET=$JWT_SECRET
+          ALLOWED_ORIGINS=$ALLOWED_ORIGINS
+          DB_NAME=$DB_NAME
+          DB_USER=$DB_USER
+          DB_PASS=$DB_PASS
+          MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+          METRICS_TOKEN=$METRICS_TOKEN
+          EOF
+          docker compose up -d --build
+      - name: Verify application + MySQL health
+        run: |
+          for i in {1..45}; do
+            if curl --fail --silent http://127.0.0.1:3001/health > /tmp/health.json; then
+              cat /tmp/health.json
+              grep -q '"driver":"mysql"' /tmp/health.json
+              grep -q '"redis":{"status":"ok"' /tmp/health.json
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+      - if: always()
+        run: docker compose down -v || true

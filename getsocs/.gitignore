@@ -1,0 +1,43 @@
+# Secrets
+.env
+.env.*
+!.env.example
+server/.env
+client/.env.local
+client/.env.*.local
+
+# Dependencies
+node_modules/
+server/node_modules/
+client/node_modules/
+
+# Runtime/generated data
+server/uploads/
+server/private_uploads/
+server/db.json
+server/server.test.json
+server/mysql-backup-*.json
+*.log
+coverage/
+.nyc_output/
+
+# Frontend build
+client/build/
+
+# Local tooling / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+e2e/e2e.test.json
+e2e/test-results/
+e2e/playwright-report/
+e2e/blob-report/
+
+# Local performance / backup artifacts
+docs/performance/*.local.json
+docs/performance/*.local.md
+server/backups/
+backups/
+*.sql.gz
+*.sql.gz.sha256

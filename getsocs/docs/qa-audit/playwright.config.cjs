@@ -1,0 +1,2 @@
+const { defineConfig } = require('../../e2e/node_modules/@playwright/test');
+module.exports=defineConfig({testDir:'.',testMatch:'adapted-flows.spec.js',workers:1,timeout:30000,reporter:[['json',{outputFile:'adapted-e2e-results.json'}]],outputDir:'adapted-e2e-artifacts',use:{baseURL:'http://getsocs.localhost:3101',trace:'retain-on-failure',screenshot:'only-on-failure',launchOptions:{args:['--host-resolver-rules=MAP getsocs.localhost 127.0.0.1','--no-proxy-server']}}});

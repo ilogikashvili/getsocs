@@ -1,0 +1,64 @@
+{
+  "short_name": "Getsocs",
+  "name": "Getsocs Marketplace",
+  "description": "Open Getsocs marketplace, messages, selling, and support from your phone home screen.",
+  "icons": [
+    {
+      "src": "getsocs-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "getsocs-logo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "getsocs-logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "theme_color": "#0b1220",
+  "background_color": "#0b1220",
+  "categories": ["shopping", "social"],
+  "shortcuts": [
+    {
+      "name": "Marketplace",
+      "short_name": "Shop",
+      "description": "Browse available social accounts.",
+      "url": "/products?source=pwa-shortcut",
+      "icons": [{ "src": "getsocs-logo.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Messages",
+      "short_name": "Messages",
+      "description": "Open your Getsocs messages.",
+      "url": "/messages?source=pwa-shortcut",
+      "icons": [{ "src": "getsocs-logo.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Sell Account",
+      "short_name": "Sell",
+      "description": "List a social account for sale.",
+      "url": "/upload?source=pwa-shortcut",
+      "icons": [{ "src": "getsocs-logo.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Support",
+      "short_name": "Support",
+      "description": "Contact Getsocs support.",
+      "url": "/support?source=pwa-shortcut",
+      "icons": [{ "src": "getsocs-logo.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

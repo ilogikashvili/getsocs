@@ -1,0 +1,2056 @@
+/* ========================================================================== 
+   Getsocs theme layer
+   --------------------------------------------------------------------------
+   Dark mode remains the product's original visual treatment.  This file is
+   imported last and only changes existing design tokens / selectors when
+   html[data-theme="light"] is active.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --theme-control-bg: rgba(255, 255, 255, 0.055);
+  --theme-control-border: rgba(133, 102, 255, 0.24);
+  --theme-control-hover: rgba(124, 92, 255, 0.15);
+  --theme-control-thumb: linear-gradient(135deg, #2fcaff, #7c5cff 55%, #df45ff);
+  --theme-control-shadow: 0 8px 22px rgba(2, 3, 20, 0.28);
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+
+  /* Core marketplace tokens */
+  --bg: #f6f7fd;
+  --panel: #ffffff;
+  --panel-2: #f7f8ff;
+  --card: #ffffff;
+  --card-hover: #f8f7ff;
+  --surface: #ffffff;
+  --surface2: #f7f8ff;
+  --stroke: rgba(87, 75, 154, 0.15);
+  --border: rgba(87, 75, 154, 0.15);
+  --text: #17182b;
+  --muted: #66708d;
+  --soft: #8b94ad;
+  --shadow: 0 22px 52px rgba(50, 45, 98, 0.10);
+
+  /* Newer marketplace tokens */
+  --target-bg: #f6f7fd;
+  --target-bg-deep: #eef1fa;
+  --target-panel: rgba(255, 255, 255, 0.93);
+  --target-panel-strong: rgba(255, 255, 255, 0.98);
+  --target-border: rgba(92, 76, 166, 0.16);
+  --target-border-bright: rgba(124, 92, 255, 0.34);
+  --target-text: #17182b;
+  --target-muted: #68718e;
+  --target-soft: #8b94ad;
+
+  /* Admin tokens */
+  --bg-page: #f5f7fb;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --border-color: #e1e6ef;
+  --border-color-soft: rgba(203, 213, 225, 0.78);
+  --slate-700: #d9e0ea;
+  --slate-800: #edf1f6;
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+  --text-muted: #8a98ab;
+
+  /* Messages page tokens */
+  --gs-bg: #f5f6fb;
+  --gs-sidebar-bg: #ffffff;
+  --gs-panel-bg: #ffffff;
+  --gs-panel-bg-alt: #f6f7fb;
+  --gs-border: #e1e4ed;
+  --gs-border-soft: rgba(214, 219, 230, 0.76);
+  --gs-bubble-theirs: #f0f2f8;
+  --gs-text-primary: #17182b;
+  --gs-text-secondary: #687087;
+  --gs-text-muted: #9299aa;
+
+  --theme-control-bg: rgba(36, 38, 71, 0.045);
+  --theme-control-border: rgba(92, 76, 166, 0.16);
+  --theme-control-hover: rgba(124, 92, 255, 0.09);
+  --theme-control-shadow: 0 8px 22px rgba(50, 45, 98, 0.10);
+}
+
+html,
+body,
+.app-shell,
+.main-content,
+.sidebar,
+.app-header,
+.panel,
+.card,
+.page-card,
+.section-card,
+.profile-card,
+input,
+select,
+textarea,
+button,
+a {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 180ms;
+  transition-timing-function: ease;
+}
+
+/* --------------------------------------------------------------------------
+   Theme switcher
+   -------------------------------------------------------------------------- */
+.theme-toggle {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 9px 4px 5px;
+  border: 1px solid var(--theme-control-border);
+  border-radius: 999px;
+  background: var(--theme-control-bg);
+  color: var(--text);
+  box-shadow: var(--theme-control-shadow);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  background: var(--theme-control-hover);
+  border-color: rgba(124, 92, 255, 0.34);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.theme-toggle-track {
+  position: relative;
+  width: 58px;
+  height: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(124, 92, 255, 0.10);
+  border: 1px solid rgba(124, 92, 255, 0.14);
+  overflow: hidden;
+}
+
+.theme-toggle-option {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+.theme-toggle-option svg {
+  width: 15px;
+  height: 15px;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--theme-control-thumb);
+  box-shadow: 0 5px 14px rgba(78, 58, 179, 0.30);
+  transform: translateX(28px);
+  transition: transform 180ms ease;
+}
+
+.theme-toggle[data-current-theme="light"] .theme-toggle-thumb {
+  transform: translateX(0);
+}
+
+.theme-toggle[data-current-theme="dark"] .theme-toggle-moon,
+.theme-toggle[data-current-theme="light"] .theme-toggle-sun {
+  color: #ffffff;
+}
+
+.theme-toggle-label {
+  min-width: 32px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.theme-toggle.is-compact {
+  min-width: 0;
+  padding: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   Shared shell and neutral surfaces
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 82% 6%, rgba(124, 92, 255, 0.10), transparent 30%),
+    radial-gradient(circle at 16% 88%, rgba(37, 215, 255, 0.08), transparent 30%),
+    linear-gradient(180deg, #fbfcff 0%, #f3f5fb 54%, #f6f7fd 100%);
+  color: var(--text);
+}
+
+html[data-theme="light"] .app-shell {
+  background: linear-gradient(180deg, #fafbff 0%, #f3f5fb 100%);
+}
+
+html[data-theme="light"] .main-content,
+html[data-theme="light"] .content {
+  background:
+    radial-gradient(circle at 70% 2%, rgba(124, 92, 255, 0.09), transparent 32%),
+    radial-gradient(circle at 14% 18%, rgba(37, 215, 255, 0.055), transparent 30%),
+    linear-gradient(180deg, #fbfcff 0%, #f4f6fc 100%);
+}
+
+html[data-theme="light"] .sidebar {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fd 100%);
+  border-right-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 12px 0 36px rgba(50, 45, 98, 0.055);
+}
+
+html[data-theme="light"] .app-header {
+  background: rgba(255, 255, 255, 0.91);
+  border-bottom-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 12px 36px rgba(50, 45, 98, 0.075);
+}
+
+html[data-theme="light"] .app-header:hover {
+  background: rgba(255, 255, 255, 0.97);
+}
+
+html[data-theme="light"] .brand-title,
+html[data-theme="light"] .sidebar-brand strong,
+html[data-theme="light"] .header-search input,
+html[data-theme="light"] .header-logout,
+html[data-theme="light"] .header-link,
+html[data-theme="light"] .header-mini-btn,
+html[data-theme="light"] .icon-btn,
+html[data-theme="light"] .sidebar-toggle {
+  color: var(--text);
+}
+
+html[data-theme="light"] .header-search,
+html[data-theme="light"] .top-nav,
+html[data-theme="light"] .header-mini-btn,
+html[data-theme="light"] .header-logout,
+html[data-theme="light"] .icon-btn,
+html[data-theme="light"] .sidebar-toggle,
+html[data-theme="light"] .user-badge {
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.14);
+}
+
+html[data-theme="light"] .header-search:focus-within,
+html[data-theme="light"] .header-mini-btn:hover,
+html[data-theme="light"] .header-logout:hover,
+html[data-theme="light"] .icon-btn:hover,
+html[data-theme="light"] .icon-btn.active,
+html[data-theme="light"] .sidebar-toggle:hover {
+  background: rgba(124, 92, 255, 0.08);
+}
+
+html[data-theme="light"] .bottom-nav {
+  background: rgba(255, 255, 255, 0.94);
+  border-top-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 -10px 30px rgba(50, 45, 98, 0.08);
+}
+
+html[data-theme="light"] .bottom-nav-item {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .bottom-nav-item.active {
+  color: var(--accent);
+}
+
+/* Generic neutral cards and form controls */
+html[data-theme="light"] .panel,
+html[data-theme="light"] .card,
+html[data-theme="light"] .page-card,
+html[data-theme="light"] .section-card,
+html[data-theme="light"] .profile-card,
+html[data-theme="light"] .product-detail-card,
+html[data-theme="light"] .chat-card,
+html[data-theme="light"] .market-empty-panel,
+html[data-theme="light"] .profile-hero-card,
+html[data-theme="light"] .profile-panel,
+html[data-theme="light"] .profile-media-panel,
+html[data-theme="light"] .profile-membership-panel,
+html[data-theme="light"] .product-visual-panel,
+html[data-theme="light"] .product-info-panel,
+html[data-theme="light"] .seller-detail-card,
+html[data-theme="light"] .seller-profile-hero,
+html[data-theme="light"] .dashboard-reviews {
+  background:
+    radial-gradient(circle at 85% 0%, rgba(124, 92, 255, 0.055), transparent 34%),
+    linear-gradient(180deg, #ffffff, #fbfbfe);
+  border-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 14px 38px rgba(50, 45, 98, 0.07);
+}
+
+html[data-theme="light"] .form,
+html[data-theme="light"] .file-upload,
+html[data-theme="light"] .comment-row,
+html[data-theme="light"] .transaction-row,
+html[data-theme="light"] .review-item,
+html[data-theme="light"] .review-form,
+html[data-theme="light"] .payment-modal-channel-summary,
+html[data-theme="light"] .code-box strong {
+  background: rgba(71, 75, 112, 0.035);
+  border-color: rgba(92, 76, 166, 0.12);
+}
+
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea,
+html[data-theme="light"] .form input,
+html[data-theme="light"] .form select,
+html[data-theme="light"] .form textarea,
+html[data-theme="light"] .pending-approval-form input,
+html[data-theme="light"] .review-form textarea,
+html[data-theme="light"] .comment-form textarea {
+  color: var(--text);
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.16);
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #959db0;
+}
+
+html[data-theme="light"] select option,
+html[data-theme="light"] .form select option,
+html[data-theme="light"] .target-category-select option,
+html[data-theme="light"] .target-sort-field select option,
+html[data-theme="light"] .notifications-toolbar-actions option,
+html[data-theme="light"] .quiet-hours-controls option {
+  color: var(--text);
+  background: #ffffff;
+}
+
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .market-btn.secondary {
+  color: var(--text);
+  background: rgba(31, 33, 64, 0.045);
+  border-color: rgba(92, 76, 166, 0.16);
+}
+
+/* Keep contrast on intentionally saturated controls. */
+html[data-theme="light"] .btn-primary,
+html[data-theme="light"] .btn-danger,
+html[data-theme="light"] .header-upload-btn,
+html[data-theme="light"] .market-btn.primary,
+html[data-theme="light"] .buy-channel-btn,
+html[data-theme="light"] .target-search-btn,
+html[data-theme="light"] .target-toggle-chip.active,
+html[data-theme="light"] .target-pill.active,
+html[data-theme="light"] .category-tab.active,
+html[data-theme="light"] .cart-checkout-btn,
+html[data-theme="light"] .cart-dropdown-checkout,
+html[data-theme="light"] .chat-send-btn,
+html[data-theme="light"] .send-btn,
+html[data-theme="light"] .message.sent,
+html[data-theme="light"] .message-row.sent .message-bubble,
+html[data-theme="light"] .auth-submit-btn,
+html[data-theme="light"] .tab-btn.active,
+html[data-theme="light"] .chip.active {
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Marketplace / dashboard
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .market-hero {
+  border-color: rgba(124, 92, 255, 0.18);
+  background:
+    radial-gradient(circle at 82% 47%, rgba(124, 92, 255, 0.15), transparent 32%),
+    radial-gradient(circle at 93% 18%, rgba(37, 215, 255, 0.13), transparent 18%),
+    linear-gradient(108deg, #ffffff 0%, #faf9ff 48%, #f2efff 100%);
+  box-shadow: inset 0 1px 0 #ffffff, 0 18px 48px rgba(73, 58, 145, 0.09);
+}
+
+html[data-theme="light"] .hero-copy h1,
+html[data-theme="light"] .target-stat-card strong,
+html[data-theme="light"] .target-filter-panel h2,
+html[data-theme="light"] .category-panel h2,
+html[data-theme="light"] .target-listing-body h3,
+html[data-theme="light"] .target-listing-price,
+html[data-theme="light"] .market-head h3,
+html[data-theme="light"] .product-price-row > strong,
+html[data-theme="light"] .product-metrics strong,
+html[data-theme="light"] .product-description-list strong,
+html[data-theme="light"] .seller-profile-link strong,
+html[data-theme="light"] .seller-score-row strong,
+html[data-theme="light"] .seller-product-mini strong,
+html[data-theme="light"] .seller-profile-listing-card strong {
+  color: var(--text);
+}
+
+html[data-theme="light"] .hero-copy p,
+html[data-theme="light"] .target-stat-card small,
+html[data-theme="light"] .target-filter-group h3,
+html[data-theme="light"] .target-listing-body p,
+html[data-theme="light"] .target-listing-body small,
+html[data-theme="light"] .product-description-list span,
+html[data-theme="light"] .product-metrics span {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .target-stat-card,
+html[data-theme="light"] .target-filter-panel,
+html[data-theme="light"] .category-panel,
+html[data-theme="light"] .target-listings-panel,
+html[data-theme="light"] .target-listing-card {
+  border-color: rgba(92, 76, 166, 0.14);
+  background: rgba(255, 255, 255, 0.91);
+  box-shadow: inset 0 1px 0 #ffffff, 0 12px 34px rgba(50, 45, 98, 0.055);
+}
+
+html[data-theme="light"] .target-listing-card:hover {
+  background: #ffffff;
+  border-color: rgba(124, 92, 255, 0.30);
+  box-shadow: 0 18px 42px rgba(64, 51, 128, 0.11);
+}
+
+html[data-theme="light"] .target-pill,
+html[data-theme="light"] .category-tab,
+html[data-theme="light"] .target-toggle-chip,
+html[data-theme="light"] .target-search-field,
+html[data-theme="light"] .target-range-field,
+html[data-theme="light"] .target-category-select,
+html[data-theme="light"] .target-sort-field select {
+  color: var(--muted);
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.14);
+}
+
+html[data-theme="light"] .target-search-field input,
+html[data-theme="light"] .target-range-field input,
+html[data-theme="light"] .target-category-select,
+html[data-theme="light"] .target-sort-field select {
+  color: var(--text);
+}
+
+html[data-theme="light"] .target-topic-pill,
+html[data-theme="light"] .price-tag,
+html[data-theme="light"] .tag,
+html[data-theme="light"] .meta span,
+html[data-theme="light"] .tier,
+html[data-theme="light"] .segment button,
+html[data-theme="light"] .page-btn {
+  color: var(--text-secondary, #46506a);
+  background: rgba(31, 33, 64, 0.045);
+  border-color: rgba(92, 76, 166, 0.12);
+}
+
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .seller-product-mini,
+html[data-theme="light"] .seller-profile-listing-card {
+  color: var(--text);
+  background: #ffffff;
+  border-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 12px 32px rgba(50, 45, 98, 0.055);
+}
+
+html[data-theme="light"] .product-card:hover,
+html[data-theme="light"] .seller-product-mini:hover,
+html[data-theme="light"] .seller-profile-listing-card:hover {
+  background: #fbfaff;
+  box-shadow: 0 18px 42px rgba(50, 45, 98, 0.10);
+}
+
+html[data-theme="light"] .product-gallery-large .product-image,
+html[data-theme="light"] .product-image-placeholder {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.13), transparent 42%),
+    linear-gradient(145deg, #f5f7fb, #edf1f8);
+}
+
+html[data-theme="light"] .seller-profile-link,
+html[data-theme="light"] .product-metrics div,
+html[data-theme="light"] .product-description-list div,
+html[data-theme="light"] .seller-score-row div,
+html[data-theme="light"] .profile-row,
+html[data-theme="light"] .points-card {
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.12);
+}
+
+html[data-theme="light"] .comment-row p,
+html[data-theme="light"] .comment-meta strong,
+html[data-theme="light"] .profile-row strong {
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   Cart and notifications
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .cart-item-card,
+html[data-theme="light"] .cart-summary-card,
+html[data-theme="light"] .cart-saved-row,
+html[data-theme="light"] .cart-trust-panel,
+html[data-theme="light"] .notifications-list-card,
+html[data-theme="light"] .notification-side-card,
+html[data-theme="light"] .notification-dropdown,
+html[data-theme="light"] .cart-dropdown {
+  border-color: rgba(92, 76, 166, 0.14);
+  background:
+    radial-gradient(circle at 80% 0%, rgba(124, 92, 255, 0.055), transparent 34%),
+    linear-gradient(180deg, #ffffff, #fafbfe);
+  box-shadow: 0 18px 44px rgba(50, 45, 98, 0.09);
+}
+
+html[data-theme="light"] .cart-page-header p,
+html[data-theme="light"] .cart-platform-line,
+html[data-theme="light"] .cart-trust-row,
+html[data-theme="light"] .cart-saved-row,
+html[data-theme="light"] .cart-summary-card header span,
+html[data-theme="light"] .cart-summary-lines p,
+html[data-theme="light"] .cart-balance-note,
+html[data-theme="light"] .cart-trust-feature p,
+html[data-theme="light"] .notifications-page-header p,
+html[data-theme="light"] .notifications-empty-state,
+html[data-theme="light"] .notification-dropdown-row small,
+html[data-theme="light"] .notification-dropdown-row time,
+html[data-theme="light"] .notification-page-row small,
+html[data-theme="light"] .notification-page-row time {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .cart-item-side > strong,
+html[data-theme="light"] .cart-summary-lines strong,
+html[data-theme="light"] .cart-summary-total span,
+html[data-theme="light"] .cart-summary-total strong,
+html[data-theme="light"] .cart-trust-feature strong,
+html[data-theme="light"] .notifications-empty-state strong,
+html[data-theme="light"] .notification-dropdown-row strong,
+html[data-theme="light"] .notification-page-row strong,
+html[data-theme="light"] .notification-side-card h2,
+html[data-theme="light"] .notification-preference-row strong,
+html[data-theme="light"] .notification-tip-row strong {
+  color: var(--text) !important;
+}
+
+html[data-theme="light"] .cart-balance-btn,
+html[data-theme="light"] .notifications-toolbar-actions button,
+html[data-theme="light"] .notifications-toolbar-actions label,
+html[data-theme="light"] .notifications-filter-tabs button,
+html[data-theme="light"] .notification-dropdown-tabs button,
+html[data-theme="light"] .notification-preference-row,
+html[data-theme="light"] .notification-tip-row {
+  color: var(--text);
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.14);
+}
+
+html[data-theme="light"] .notification-dropdown header,
+html[data-theme="light"] .notification-dropdown-tabs,
+html[data-theme="light"] .notification-dropdown-row,
+html[data-theme="light"] .cart-dropdown header,
+html[data-theme="light"] .cart-dropdown-item,
+html[data-theme="light"] .cart-dropdown-total {
+  border-color: rgba(92, 76, 166, 0.11);
+}
+
+/* --------------------------------------------------------------------------
+   Authentication
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .auth-page-v2 {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(124, 92, 255, 0.10), transparent 42%),
+    radial-gradient(circle at 88% 100%, rgba(37, 215, 255, 0.08), transparent 44%),
+    #f7f8fc;
+}
+
+html[data-theme="light"] .auth-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 24px 60px rgba(50, 45, 98, 0.11);
+}
+
+html[data-theme="light"] .auth-field-control input,
+html[data-theme="light"] .auth-social-btn,
+html[data-theme="light"] .auth-info-card,
+html[data-theme="light"] .auth-checkbox input[type="checkbox"] {
+  background: rgba(31, 33, 64, 0.035);
+  border-color: rgba(92, 76, 166, 0.14);
+}
+
+html[data-theme="light"] .auth-eye-btn:hover,
+html[data-theme="light"] .auth-social-btn:hover {
+  background: rgba(124, 92, 255, 0.08);
+}
+
+html[data-theme="light"] .auth-divider::before,
+html[data-theme="light"] .auth-divider::after {
+  background: rgba(92, 76, 166, 0.14);
+}
+
+/* --------------------------------------------------------------------------
+   Messages page
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .gs-app {
+  background: var(--gs-bg);
+  color: var(--gs-text-primary);
+}
+
+html[data-theme="light"] .gs-conv-item:hover,
+html[data-theme="light"] .gs-nav-item:hover {
+  background: rgba(31, 33, 64, 0.04);
+}
+
+html[data-theme="light"] .gs-conv-item.active {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.10), rgba(217, 70, 239, 0.06));
+}
+
+html[data-theme="light"] .gs-panel,
+html[data-theme="light"] .gs-conversations,
+html[data-theme="light"] .gs-chat-panel,
+html[data-theme="light"] .gs-chat-header,
+html[data-theme="light"] .gs-chat-composer {
+  border-color: var(--gs-border);
+}
+
+/* --------------------------------------------------------------------------
+   Full-page transaction/support chat
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .chat-page {
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.09), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #f1f5fb 46%, #f5f7fc 100%);
+}
+
+html[data-theme="light"] .chat-sidebar,
+html[data-theme="light"] .chat-sidebar-header,
+html[data-theme="light"] .chat-escrow-quicklink,
+html[data-theme="light"] .chat-main,
+html[data-theme="light"] .chat-info-panel,
+html[data-theme="light"] .chat-info-listing-card,
+html[data-theme="light"] .chat-header,
+html[data-theme="light"] .chat-messages,
+html[data-theme="light"] .message-row.received .message-bubble,
+html[data-theme="light"] .chat-input-area,
+html[data-theme="light"] .chat-input {
+  background: rgba(255, 255, 255, 0.93);
+  border-color: rgba(103, 113, 139, 0.17);
+}
+
+html[data-theme="light"] .chat-messages {
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 35%),
+    #f7f9fd;
+}
+
+html[data-theme="light"] .chat-input:focus {
+  background: #ffffff;
+}
+
+html[data-theme="light"] .chat-sidebar-header h3,
+html[data-theme="light"] .chat-header h2,
+html[data-theme="light"] .chat-info-panel h3,
+html[data-theme="light"] .message-row.received .message-bubble,
+html[data-theme="light"] .chat-input {
+  color: var(--text);
+}
+
+html[data-theme="light"] .no-chats,
+html[data-theme="light"] .chat-item-meta,
+html[data-theme="light"] .chat-header small,
+html[data-theme="light"] .chat-info-listing-card small {
+  color: var(--muted);
+}
+
+/* Support popup keeps brand-gradient header but uses a white conversation body. */
+html[data-theme="light"] .support-chat-popup {
+  background: linear-gradient(180deg, #ffffff, #f8f9fd);
+  border-color: rgba(92, 76, 166, 0.18);
+  box-shadow: 0 24px 70px rgba(50, 45, 98, 0.18);
+}
+
+html[data-theme="light"] .messages-container,
+html[data-theme="light"] .message-input-container {
+  background: rgba(246, 248, 253, 0.96);
+  border-color: rgba(92, 76, 166, 0.12);
+}
+
+html[data-theme="light"] .message.received,
+html[data-theme="light"] .message-input,
+html[data-theme="light"] .view-all-chats-btn,
+html[data-theme="light"] .back-btn,
+html[data-theme="light"] .chat-item {
+  color: var(--text);
+  background: rgba(31, 33, 64, 0.045);
+  border-color: rgba(92, 76, 166, 0.12);
+}
+
+html[data-theme="light"] .message-input::placeholder {
+  color: #929bad;
+}
+
+/* --------------------------------------------------------------------------
+   Admin
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .admin-shell,
+html[data-theme="light"] .admin-dashboard,
+html[data-theme="light"] .page {
+  color: var(--text-primary);
+}
+
+html[data-theme="light"] .nav-item:hover,
+html[data-theme="light"] .search-input,
+html[data-theme="light"] .chat-list-item:hover,
+html[data-theme="light"] .chat-input {
+  background: rgba(51, 65, 85, 0.055);
+}
+
+html[data-theme="light"] .icon-btn {
+  background: rgba(51, 65, 85, 0.035);
+}
+
+html[data-theme="light"] .modal-card,
+html[data-theme="light"] .admin-modal,
+html[data-theme="light"] .table-card,
+html[data-theme="light"] .stat-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: 0 18px 44px rgba(50, 45, 98, 0.09);
+}
+
+html[data-theme="light"] .chat-bubble.theirs {
+  color: var(--text-primary);
+  background: #edf1f6;
+}
+
+html[data-theme="light"] .modal-close:hover {
+  color: var(--text-primary);
+}
+
+/* Old admin chat stylesheet predates the current design system. */
+html[data-theme="light"] .admin-chat-left,
+html[data-theme="light"] .admin-chat-main,
+html[data-theme="light"] .admin-chat-right {
+  color: var(--text);
+  background: #ffffff;
+  border: 1px solid rgba(92, 76, 166, 0.13);
+}
+
+html[data-theme="light"] .admin-chat-left .back-to-admin {
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   Search/filter utility panel
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .filter-card {
+  background: linear-gradient(180deg, #ffffff, #f8f9fd);
+  border-color: rgba(92, 76, 166, 0.14);
+  box-shadow: 0 14px 38px rgba(50, 45, 98, 0.07);
+}
+
+html[data-theme="light"] .filter-tab,
+html[data-theme="light"] .filter-input,
+html[data-theme="light"] .filter-select,
+html[data-theme="light"] .range-inputs input {
+  color: var(--text);
+  background: rgba(31, 33, 64, 0.04);
+  border-color: rgba(92, 76, 166, 0.14);
+}
+
+html[data-theme="light"] .filter-tab.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent), var(--accent-3));
+}
+
+/* --------------------------------------------------------------------------
+   Modals and overlays
+   -------------------------------------------------------------------------- */
+html[data-theme="light"] .modal-backdrop,
+html[data-theme="light"] .modal-overlay {
+  background: rgba(22, 24, 43, 0.45);
+}
+
+html[data-theme="light"] .modal-card {
+  color: var(--text);
+  background: #ffffff;
+  border-color: rgba(92, 76, 166, 0.16);
+}
+
+@media (max-width: 760px) {
+  .theme-toggle {
+    padding-right: 5px;
+  }
+
+  .theme-toggle-label {
+    display: none;
+  }
+
+  .theme-toggle-track {
+    width: 52px;
+  }
+
+  .theme-toggle-thumb {
+    transform: translateX(22px);
+  }
+
+  .theme-toggle[data-current-theme="light"] .theme-toggle-thumb {
+    transform: translateX(0);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  body,
+  .app-shell,
+  .main-content,
+  .sidebar,
+  .app-header,
+  .panel,
+  .card,
+  .page-card,
+  .section-card,
+  .profile-card,
+  input,
+  select,
+  textarea,
+  button,
+  a,
+  .theme-toggle-thumb {
+    transition: none !important;
+  }
+}
+
+/* Explicit legacy text colors that predate the token system. */
+html[data-theme="light"] .header-hamburger,
+html[data-theme="light"] .policy-section h2,
+html[data-theme="light"] .policy-section p,
+html[data-theme="light"] .policy-section li,
+html[data-theme="light"] .review-form-row,
+html[data-theme="light"] .review-text,
+html[data-theme="light"] .hero-trust-strip li,
+html[data-theme="light"] .target-listing-card,
+html[data-theme="light"] .target-listing-followers,
+html[data-theme="light"] .dr-panel-head h3,
+html[data-theme="light"] .dr-summary,
+html[data-theme="light"] .dr-summary strong,
+html[data-theme="light"] .dr-form textarea,
+html[data-theme="light"] .dr-card-head strong,
+html[data-theme="light"] .dr-card-text,
+html[data-theme="light"] .profile-rating,
+html[data-theme="light"] .membership-status,
+html[data-theme="light"] .membership-plan-card span,
+html[data-theme="light"] .membership-plan-card strong,
+html[data-theme="light"] .profile-detail-list strong,
+html[data-theme="light"] .profile-feed-list h4,
+html[data-theme="light"] .topic-list strong,
+html[data-theme="light"] .profile-follow-row h4,
+html[data-theme="light"] .profile-feedback-card h4,
+html[data-theme="light"] .settings-page-header h1,
+html[data-theme="light"] .settings-card-header h2,
+html[data-theme="light"] .settings-profile-meta > strong,
+html[data-theme="light"] .settings-row > strong,
+html[data-theme="light"] .settings-info-row > strong,
+html[data-theme="light"] .settings-payment-row strong,
+html[data-theme="light"] .settings-action-row strong,
+html[data-theme="light"] .settings-detail-hero h2,
+html[data-theme="light"] .settings-detail-metric strong,
+html[data-theme="light"] .settings-feature-card strong,
+html[data-theme="light"] .settings-toggle-row strong,
+html[data-theme="light"] .settings-detail-row strong,
+html[data-theme="light"] .settings-verification-card strong,
+html[data-theme="light"] .settings-device-row strong,
+html[data-theme="light"] .settings-mini-table strong,
+html[data-theme="light"] .chat-item-header strong,
+html[data-theme="light"] .chat-info-row,
+html[data-theme="light"] .chat-info-listing-card,
+html[data-theme="light"] .chat-info-listing-card strong,
+html[data-theme="light"] .chat-header-info h3,
+html[data-theme="light"] .chat-product-info,
+html[data-theme="light"] .sidebar-title,
+html[data-theme="light"] .profile-name,
+html[data-theme="light"] .topbar-title,
+html[data-theme="light"] .stat-value,
+html[data-theme="light"] .activity-text,
+html[data-theme="light"] .table-name,
+html[data-theme="light"] .pending-info-name,
+html[data-theme="light"] .pending-price,
+html[data-theme="light"] .modal-title,
+html[data-theme="light"] .detail-value,
+html[data-theme="light"] .chat-list-name {
+  color: var(--text, var(--text-primary));
+}
+
+html[data-theme="light"] .settings-card-header p,
+html[data-theme="light"] .settings-page .settings-card-header p,
+html[data-theme="light"] .settings-profile-meta > span,
+html[data-theme="light"] .settings-info-row span,
+html[data-theme="light"] .settings-select-row strong,
+html[data-theme="light"] .settings-row-label,
+html[data-theme="light"] .settings-payment-row strong span,
+html[data-theme="light"] .settings-mini-table em,
+html[data-theme="light"] .chat-item-price {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .settings-nickname-form input,
+html[data-theme="light"] .settings-select-row select,
+html[data-theme="light"] .settings-select-row option {
+  color: var(--text);
+  background: #ffffff;
+}
+
+html[data-theme="light"] .side-link,
+html[data-theme="light"] .quick-link,
+html[data-theme="light"] .seller-cta {
+  color: var(--muted);
+}
+
+html[data-theme="light"] .side-link:hover,
+html[data-theme="light"] .side-link.active,
+html[data-theme="light"] .quick-link:hover,
+html[data-theme="light"] .quick-link.active {
+  color: var(--accent);
+  background: rgba(124, 92, 255, 0.08);
+}
+
+html[data-theme="light"] .seller-cta a {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Final light-mode and responsive visual lock
+   --------------------------------------------------------------------------
+   This file is imported last. Keep the public shell close to the reference
+   mockups and keep header/sidebar controls reachable at every width.
+   ========================================================================== */
+
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 78% 0%, rgba(126, 91, 255, 0.10), transparent 34rem),
+    linear-gradient(180deg, #fbfcff 0%, #f4f6fb 100%);
+}
+
+html[data-theme="light"] .app-shell:not(.no-shell) {
+  overflow-x: clip;
+  background: linear-gradient(180deg, #fbfcff 0%, #f4f6fb 100%);
+}
+
+html[data-theme="light"] .sidebar:not(.is-drawer) {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  border-right: 1px solid #e1e6f2;
+  box-shadow: 12px 0 34px rgba(54, 62, 105, 0.07);
+}
+
+html[data-theme="light"] .sidebar-brand img {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  box-shadow: 0 14px 28px rgba(37, 65, 155, 0.22);
+}
+
+html[data-theme="light"] .sidebar-brand strong {
+  color: #11183b;
+  font-weight: 850;
+}
+
+html[data-theme="light"] .sidebar-brand small,
+html[data-theme="light"] .quick-links h2 {
+  color: #7b86a8;
+}
+
+html[data-theme="light"] .side-link,
+html[data-theme="light"] .quick-link {
+  color: #566384;
+  border: 1px solid transparent;
+  border-radius: 13px;
+}
+
+html[data-theme="light"] .side-link:hover,
+html[data-theme="light"] .side-link.active {
+  color: #7047ff;
+  background: linear-gradient(135deg, rgba(112, 71, 255, 0.12), rgba(112, 71, 255, 0.04));
+  border-color: rgba(112, 71, 255, 0.24);
+}
+
+html[data-theme="light"] .quick-link:hover,
+html[data-theme="light"] .quick-link.active {
+  color: #7047ff;
+  background: #f4f1ff;
+  border-color: rgba(112, 71, 255, 0.22);
+  box-shadow: none;
+}
+
+html[data-theme="light"] .app-header {
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #e1e6f2;
+  box-shadow: 0 12px 34px rgba(54, 62, 105, 0.07);
+}
+
+html[data-theme="light"] .header-search {
+  min-height: 52px;
+  border-radius: 14px;
+  background: #fbfcff;
+  border-color: #dfe5f2;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+html[data-theme="light"] .header-search input {
+  color: #11183b;
+}
+
+html[data-theme="light"] .header-right,
+html[data-theme="light"] .header-search,
+html[data-theme="light"] .main-area,
+html[data-theme="light"] .main-content {
+  min-width: 0;
+}
+
+html[data-theme="light"] .header-upload-btn {
+  background: linear-gradient(135deg, #2477ff 0%, #8b35ff 100%);
+  box-shadow: 0 14px 30px rgba(112, 71, 255, 0.25);
+}
+
+html[data-theme="light"] .header-profile {
+  background: #ecebff;
+  color: #7047ff;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+html[data-theme="light"] .market-dashboard {
+  background: transparent;
+}
+
+html[data-theme="light"] .market-hero,
+html[data-theme="light"] .target-filter-panel,
+html[data-theme="light"] .target-listings-panel,
+html[data-theme="light"] .category-panel,
+html[data-theme="light"] .market-empty-panel {
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(126, 91, 255, 0.055), transparent 20rem),
+    #ffffff;
+  border-color: #e1e6f2;
+  box-shadow: 0 18px 46px rgba(54, 62, 105, 0.075);
+}
+
+html[data-theme="light"] .target-filter-panel::before,
+html[data-theme="light"] .target-listings-panel::before {
+  background: transparent;
+}
+
+html[data-theme="light"] .target-pill,
+html[data-theme="light"] .category-tab,
+html[data-theme="light"] .target-toggle-chip,
+html[data-theme="light"] .target-category-select,
+html[data-theme="light"] .target-sort-field select,
+html[data-theme="light"] .target-range-field input,
+html[data-theme="light"] .target-search-field {
+  background: #fbfcff;
+  color: #566384;
+  border-color: #dfe5f2;
+}
+
+html[data-theme="light"] .target-pill.active,
+html[data-theme="light"] .category-tab.active,
+html[data-theme="light"] .target-toggle-chip.active {
+  color: #7047ff;
+  background: #f4f1ff;
+  border-color: rgba(112, 71, 255, 0.28);
+}
+
+html[data-theme="light"] .target-search-btn,
+html[data-theme="light"] .market-btn.primary {
+  background: linear-gradient(135deg, #2477ff 0%, #8b35ff 100%);
+  box-shadow: 0 16px 34px rgba(112, 71, 255, 0.24);
+}
+
+html[data-theme="light"] .market-btn.secondary {
+  background: #ffffff;
+  color: #11183b;
+  border-color: #dfe5f2;
+  box-shadow: 0 12px 24px rgba(54, 62, 105, 0.08);
+}
+
+@media (max-width: 1200px) {
+  html[data-theme="light"] .app-header,
+  .app-header {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 460px) auto;
+    gap: 16px;
+  }
+
+  html[data-theme="light"] .header-right,
+  .header-right {
+    gap: 14px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-shell:not(.no-shell) {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .app-shell:not(.no-shell) .sidebar.is-drawer {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    z-index: 90 !important;
+    width: min(84vw, 296px) !important;
+    height: 100dvh !important;
+    padding: 18px 16px 16px !important;
+    overflow-y: auto !important;
+    transform: translateX(-105%);
+    transition: transform 0.22s ease;
+    background: linear-gradient(180deg, rgba(9,11,34,.98), rgba(8,10,31,.98));
+    box-shadow: 20px 0 42px rgba(0, 0, 0, 0.28);
+  }
+
+  .app-shell:not(.no-shell) .sidebar.is-drawer.is-open {
+    transform: translateX(0);
+  }
+
+  html[data-theme="light"] .app-shell:not(.no-shell) .sidebar.is-drawer {
+    background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    border-right: 1px solid #e1e6f2;
+    box-shadow: 20px 0 42px rgba(54, 62, 105, 0.16);
+  }
+
+  .sidebar-backdrop {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(7, 10, 31, 0.52);
+    backdrop-filter: blur(2px);
+  }
+
+  .main-area,
+  .main-content {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+  }
+
+  .app-header {
+    position: sticky !important;
+    top: 0;
+    left: 0 !important;
+    right: 0;
+    width: 100%;
+    min-height: 72px;
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    gap: 10px !important;
+    padding: 10px 12px !important;
+  }
+
+  .header-hamburger {
+    display: inline-flex !important;
+  }
+
+  .header-compact-logo {
+    display: flex !important;
+    justify-self: start;
+  }
+
+  .header-balance-spacer {
+    display: none !important;
+  }
+
+  .header-search {
+    grid-column: 1 / -1;
+    order: 2;
+    width: 100%;
+    height: 46px;
+  }
+
+  .header-right {
+    justify-self: end;
+    gap: 8px;
+    min-width: 0;
+    flex-wrap: nowrap;
+  }
+
+  .header-upload-btn {
+    width: 42px;
+    min-width: 42px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+  }
+
+  .header-profile,
+  .header-mini-btn {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+  }
+
+  .header-logout {
+    max-width: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.82rem;
+  }
+
+  .market-dashboard {
+    padding: 14px 12px 96px;
+  }
+
+  .target-filter-row,
+  .filter-row-search,
+  .filter-row-ranges,
+  .filter-row-sort {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .filter-row-ranges .target-filter-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .target-search-field,
+  .target-category-select,
+  .target-toggle-chip,
+  .target-sort-field,
+  .target-search-btn {
+    width: 100%;
+  }
+
+  .bottom-nav {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    max-width: none;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .header-right {
+    gap: 6px;
+  }
+
+  .header-logout {
+    display: none;
+  }
+
+  .header-profile {
+    width: 36px;
+    height: 36px;
+  }
+
+  .target-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Final App-Wide Responsive Containment Audit
+   ========================================================================== */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+#root,
+.app-shell,
+.main-area,
+.main-content,
+.content,
+.page,
+.page-shell,
+.page-card,
+.section-card,
+.profile-card,
+.product-detail-card,
+.chat-card,
+.panel,
+.card,
+.modal-card,
+.modal,
+.auth-page-v2,
+.auth-card-wrap,
+.auth-card,
+.market-dashboard,
+.market-hero,
+.target-dashboard-grid,
+.target-filter-panel,
+.target-listings-panel,
+.target-listing-card,
+.product-detail-grid,
+.product-deal-layout,
+.product-lower-grid,
+.settings-page,
+.settings-layout,
+.settings-content,
+.settings-content-grid,
+.settings-detail-content,
+.cart-page,
+.notifications-page,
+.seller-profile-page,
+.messages-page,
+.gs-app,
+.gs-main,
+.gs-messages-layout,
+.chat-page,
+.chat-container,
+.admin-panel-root,
+.admin-panel-root .main-col,
+.admin-panel-root .main-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  min-width: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+span,
+strong,
+small,
+a,
+label,
+td,
+th,
+button {
+  overflow-wrap: anywhere;
+}
+
+.app-shell:not(.admin-layout-host),
+.app-shell.no-shell,
+.main-area.no-shell,
+.main-area.no-shell .main-content {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.main-area:not(.admin-layout-area),
+.main-content:not(.admin-layout-content) {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+
+.app-header {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.header-search,
+.header-search input,
+.header-right,
+.header-notifications,
+.notification-dropdown-row > span,
+.user-badge,
+.sidebar-brand,
+.sidebar-brand span,
+.side-link,
+.quick-link {
+  min-width: 0;
+}
+
+.header-right,
+.page-header,
+.market-head,
+.reviews-header,
+.dashboard-reviews-header,
+.profile-card .profile-row,
+.transaction-row,
+.modal-actions,
+.chat-actions,
+.code-box,
+.pending-approval-form,
+.filter-row,
+.filter-actions,
+.toolbar,
+.hero-actions,
+.target-filter-row,
+.target-pill-row,
+.category-tabs,
+.admin-actions {
+  flex-wrap: wrap;
+}
+
+.header-upload-btn,
+.theme-toggle,
+.header-mini-btn,
+.header-profile {
+  flex-shrink: 0;
+}
+
+.notification-dropdown {
+  width: min(420px, calc(100vw - 24px)) !important;
+  max-width: calc(100vw - 24px) !important;
+}
+
+.notification-dropdown-row {
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+}
+
+.page-shell,
+.page-card,
+.policy-page {
+  width: 100%;
+}
+
+.page-header > *,
+.market-head > *,
+.reviews-header > *,
+.dashboard-reviews-header > *,
+.transaction-row > *,
+.profile-card .profile-row > *,
+.code-box > *,
+.pending-approval-form > *,
+.filter-row > *,
+.target-filter-row > *,
+.target-sort-field,
+.target-search-field {
+  min-width: 0;
+}
+
+.products-grid,
+.cards,
+.target-listing-grid,
+.seller-products-grid,
+.seller-profile-listings-grid,
+.cart-grid,
+.notifications-grid,
+.settings-content-grid,
+.settings-detail-grid,
+.settings-integration-grid,
+.dr-panel-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+
+.stats,
+.target-stat-grid,
+.points-section {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+}
+
+.market-layout,
+.product-detail-grid,
+.product-deal-layout,
+.product-lower-grid,
+.dr-panel,
+.settings-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 901px) {
+  .market-layout {
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  }
+
+  .product-detail-grid,
+  .product-deal-layout {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  }
+
+  .settings-layout {
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  }
+}
+
+.market-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+  overflow: visible;
+}
+
+.hero-copy,
+.hero-copy p,
+.product-info-panel,
+.product-visual-panel,
+.seller-detail-card,
+.profile-panel,
+.profile-media-panel,
+.profile-membership-panel,
+.settings-card,
+.settings-detail-card {
+  min-width: 0;
+}
+
+.product-image,
+.product-card img,
+.target-listing-media img,
+.seller-avatar img,
+.seller-profile-avatar img,
+.profile-avatar img,
+.profile-photo img,
+.cart-item-image img,
+.product-gallery-large img,
+.product-thumbs img,
+.comment-avatar img,
+.gs-avatar img,
+.chat-info-avatar img,
+.header-profile img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-image-wrap,
+.target-listing-media,
+.card-media,
+.product-gallery-large,
+.product-thumbs,
+.profile-photo,
+.seller-profile-avatar,
+.cart-item-image {
+  max-width: 100%;
+}
+
+.form input,
+.form select,
+.form textarea,
+.filter-input,
+.filter-select,
+.range-inputs input,
+.pending-approval-form input,
+.review-form textarea,
+.comment-form textarea,
+.auth-field-control input,
+.settings-nickname-form input,
+.settings-select-row select,
+.target-category-select,
+.target-sort-field select,
+.target-range-field input,
+.target-search-field input,
+.gs-search-input,
+.gs-composer-input,
+.chat-input,
+.message-input {
+  width: 100%;
+}
+
+.form button,
+.filter-actions .btn,
+.modal-actions .btn,
+.chat-actions .btn,
+.pending-approval-form button {
+  min-width: 0;
+}
+
+table,
+.table {
+  width: 100%;
+  max-width: 100%;
+}
+
+.table-wrap,
+.table-card,
+.settings-mini-table,
+.cart-items,
+.notifications-list-card {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrap > table,
+.table-card table {
+  min-width: 640px;
+}
+
+.modal-backdrop,
+.modal-overlay,
+.install-guide-backdrop {
+  padding: max(12px, env(safe-area-inset-top, 0px)) 12px max(12px, env(safe-area-inset-bottom, 0px));
+}
+
+.modal-card,
+.modal,
+.install-guide,
+.claim-ownership-modal {
+  width: min(100%, 560px);
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+}
+
+.claim-code-box {
+  letter-spacing: 0.12em;
+  overflow-wrap: anywhere;
+}
+
+.settings-detail-hero,
+.settings-feature-card,
+.settings-toggle-row,
+.settings-detail-row,
+.settings-verification-card,
+.settings-device-row,
+.settings-payment-row,
+.settings-action-row,
+.settings-mini-table > div,
+.cart-item-card,
+.cart-summary-card,
+.notification-page-row,
+.notification-preference-row,
+.notification-tip-row,
+.target-card-action,
+.card-top,
+.product-meta,
+.chat-header,
+.gs-thread-header,
+.gs-escrow-chat-btn,
+.chat-item-header,
+.chat-info-row {
+  min-width: 0;
+}
+
+.settings-detail-hero,
+.settings-feature-card,
+.settings-toggle-row,
+.settings-detail-row,
+.settings-verification-card,
+.settings-device-row,
+.settings-payment-row,
+.settings-action-row,
+.settings-mini-table > div {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 761px) {
+  .settings-feature-card,
+  .settings-toggle-row,
+  .settings-device-row {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+  }
+
+  .settings-detail-row {
+    grid-template-columns: 26px minmax(0, 1fr) minmax(90px, auto) auto;
+  }
+
+  .settings-payment-row,
+  .settings-action-row {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+  }
+}
+
+.gs-messages-layout,
+.chat-container {
+  width: 100%;
+  min-width: 0;
+}
+
+.messages-page .gs-messages-layout {
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+}
+
+.gs-conv-item,
+.gs-escrow-chat-btn {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.gs-conv-preview,
+.chat-item-product,
+.chat-item-ids,
+.gs-thread-name,
+.chat-header-info,
+.chat-header-info h3,
+.chat-product-info,
+.chat-info-listing-card strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gs-msg-bubble,
+.message-bubble,
+.chat-bubble {
+  max-width: min(85%, 680px);
+}
+
+.gs-composer,
+.chat-input-area,
+.message-input-container {
+  min-width: 0;
+}
+
+.gs-composer-input,
+.chat-input,
+.message-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.support-button,
+.support-chat-button,
+.floating-messages-btn {
+  max-width: calc(100vw - 24px);
+}
+
+@media (max-width: 1024px) {
+  .app-header {
+    max-width: calc(100vw - var(--sidebar-width, 0px));
+  }
+
+  .market-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+
+  .hero-copy p {
+    font-size: clamp(0.88rem, 2.8vw, 1rem);
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .main-area,
+  .main-content {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .app-header {
+    max-width: 100%;
+  }
+
+  .content,
+  .page-shell,
+  .page-card,
+  .section-card,
+  .profile-card,
+  .product-detail-card,
+  .chat-card,
+  .market-main,
+  .market-dashboard,
+  .settings-page,
+  .cart-page,
+  .notifications-page {
+    padding-left: min(14px, 4vw);
+    padding-right: min(14px, 4vw);
+  }
+
+  .page-header,
+  .market-head,
+  .hero,
+  .transaction-row,
+  .profile-card .profile-row,
+  .chat-meta,
+  .modal-actions,
+  .chat-actions,
+  .filter-actions,
+  .target-card-action,
+  .card-top,
+  .product-meta,
+  .chat-header,
+  .gs-thread-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .btn,
+  .market-btn,
+  .view-details-btn,
+  .buy-channel-btn,
+  .cart-checkout-btn,
+  .cart-balance-btn,
+  .auth-submit-btn,
+  .target-search-btn,
+  .chat-send-btn,
+  .send-btn,
+  .modal-actions button,
+  .filter-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .auth-card {
+    padding: 26px 18px 22px;
+  }
+
+  .auth-field-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .range-inputs,
+  .target-range-inputs {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .messages-page .gs-messages-layout,
+  .gs-messages-layout,
+  .chat-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .messages-page .gs-conversations {
+    height: min(42vh, 340px);
+  }
+
+  .messages-page .gs-thread-panel {
+    min-height: min(68vh, 640px);
+  }
+
+  .gs-msg-bubble,
+  .message-bubble,
+  .chat-bubble {
+    max-width: 92%;
+  }
+
+  .gs-composer,
+  .chat-input-area,
+  .message-input-container {
+    flex-direction: column;
+  }
+
+  .profile-tabbar {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .profile-tabbar button {
+    width: 100%;
+    min-width: 0 !important;
+    min-height: 42px;
+    padding-inline: 10px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero-visual {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: visible !important;
+  }
+
+  .shield-stage {
+    position: relative !important;
+    inset: auto !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: min(100%, 210px) !important;
+    max-width: calc(100vw - 64px) !important;
+    height: 140px !important;
+    margin: 0 auto 12px !important;
+    display: grid !important;
+    place-items: center !important;
+    transform: none !important;
+  }
+
+  .shield-base {
+    left: 50% !important;
+    width: min(186px, 82%) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .trust-shield {
+    width: 126px !important;
+    height: 126px !important;
+  }
+
+  .hero-orbit,
+  .star {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-tabbar {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .profile-tabbar button {
+    width: 100%;
+    min-width: 0 !important;
+    min-height: 42px;
+    padding-inline: 10px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@media (max-width: 425px) {
+  .content,
+  .page-shell,
+  .market-dashboard,
+  .settings-page,
+  .cart-page,
+  .notifications-page {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .card,
+  .page-card,
+  .section-card,
+  .profile-card,
+  .product-detail-card,
+  .chat-card,
+  .panel,
+  .target-filter-panel,
+  .target-listings-panel,
+  .dashboard-reviews,
+  .auth-card {
+    border-radius: 12px;
+  }
+
+  .card,
+  .page-card,
+  .section-card,
+  .profile-card,
+  .product-detail-card,
+  .chat-card,
+  .dashboard-reviews {
+    padding: 14px;
+  }
+
+  .table-wrap > table,
+  .table-card table {
+    min-width: 560px;
+  }
+
+  .notification-dropdown {
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .profile-tabbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shield-stage {
+    width: min(100%, 188px) !important;
+    height: 124px !important;
+  }
+
+  .shield-base {
+    width: min(164px, 82%) !important;
+    height: 34px !important;
+  }
+
+  .trust-shield {
+    width: 112px !important;
+    height: 112px !important;
+  }
+
+  .hero-orbit {
+    display: none !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .content,
+  .page-shell,
+  .market-dashboard,
+  .settings-page,
+  .cart-page,
+  .notifications-page {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .bottom-nav-item {
+    font-size: 0.58rem;
+  }
+
+  .bottom-nav-fab {
+    width: 46px;
+    height: 46px;
+  }
+
+  .theme-toggle-track {
+    width: 46px;
+  }
+
+  .theme-toggle-thumb {
+    transform: translateX(16px);
+  }
+
+  .table-wrap > table,
+  .table-card table {
+    min-width: 520px;
+  }
+
+  .shield-stage {
+    width: 168px !important;
+    max-width: calc(100vw - 72px) !important;
+  }
+}

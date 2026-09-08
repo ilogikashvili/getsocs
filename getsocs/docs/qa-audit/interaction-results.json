@@ -1,0 +1,99 @@
+{
+  "required": 2,
+  "pending": "GS\nGETSOCS\nTrusted social account marketplace\nWelcome back\n\nSign in to your account\n\nUsername or email\nPassword\nRemember me\nForgot password?\nSign In\n\nDon’t have an account? Create an account\n\nEscrow protected\nVerified listings\n24/7 support\nAdd Getsocs widget\nOpen browser menu, then Install app.\nAdd Widget",
+  "apiFailure": "GS\nGETSOCS\nTrusted social account marketplace\nWelcome back\n\nSign in to your account\n\nQA simulated service unavailable\nUsername or email\nPassword\nRemember me\nForgot password?\nSign In\n\nDon’t have an account? Create an account\n\nEscrow protected\nVerified listings\n24/7 support\nAdd Getsocs widget\nOpen browser menu, then Install app.\nAdd Widget",
+  "touchButtons": [
+    {
+      "name": "Close menu",
+      "width": 30,
+      "height": 30
+    },
+    {
+      "name": "Open menu",
+      "width": 38,
+      "height": 38
+    },
+    {
+      "name": "Switch to light mode",
+      "width": 64,
+      "height": 38
+    },
+    {
+      "name": "Notifications",
+      "width": 38,
+      "height": 38
+    },
+    {
+      "name": "Clear all",
+      "width": 56.890625,
+      "height": 20
+    },
+    {
+      "name": "YouTube",
+      "width": 96.140625,
+      "height": 34
+    },
+    {
+      "name": "TikTok",
+      "width": 84.640625,
+      "height": 34
+    },
+    {
+      "name": "Telegram",
+      "width": 100.09375,
+      "height": 34
+    },
+    {
+      "name": "YouTube monetized",
+      "width": 325,
+      "height": 40
+    },
+    {
+      "name": "Verified identity",
+      "width": 325,
+      "height": 40
+    },
+    {
+      "name": "Search",
+      "width": 325,
+      "height": 48
+    },
+    {
+      "name": "Add Widget",
+      "width": 281,
+      "height": 40
+    },
+    {
+      "name": "Dismiss install prompt",
+      "width": 32,
+      "height": 32
+    }
+  ],
+  "theme": "light",
+  "themeReload": "light",
+  "orientation375": {
+    "width": 375,
+    "scrollWidth": 375
+  },
+  "orientation812": {
+    "width": 812,
+    "scrollWidth": 812
+  },
+  "keyboardFocus": {
+    "tag": "A",
+    "text": "GSGETSOCSTrusted social account marketplace",
+    "outline": "rgb(229, 151, 0) auto 1px"
+  },
+  "link": "http://getsocs.localhost:3101/register",
+  "back": "http://getsocs.localhost:3101/login",
+  "msedge": {
+    "version": "152.0.4191.62",
+    "launched": true,
+    "heading": "Welcome back"
+  },
+  "chrome": {
+    "version": "152.0.7977.82",
+    "launched": true,
+    "heading": "Welcome back"
+  }
+}

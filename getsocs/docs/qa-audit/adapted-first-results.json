@@ -1,0 +1,259 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\playwright.config.cjs",
+    "rootDir": "C:/Users/HP/Downloads/getsocs_production_scalability_upgrade/getsocs/docs/qa-audit",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "adapted-e2e-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/HP/Downloads/getsocs_production_scalability_upgrade/getsocs/docs/qa-audit/adapted-e2e-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/HP/Downloads/getsocs_production_scalability_upgrade/getsocs/docs/qa-audit",
+        "testIgnore": [],
+        "testMatch": [
+          "adapted-flows.spec.js"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "adapted-flows.spec.js",
+      "file": "adapted-flows.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Getsocs critical end-to-end journeys",
+          "file": "adapted-flows.spec.js",
+          "line": 59,
+          "column": 15,
+          "specs": [
+            {
+              "title": "register -> email verification -> login -> 2FA -> dashboard",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7887,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('heading', { name: /two-factor verification/i })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /two-factor verification/i })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('heading', { name: /two-factor verification/i })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /two-factor verification/i })\u001b[22m\n\n    at C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-flows.spec.js:88:83",
+                        "location": {
+                          "file": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-flows.spec.js",
+                          "column": 83,
+                          "line": 88
+                        },
+                        "snippet": "  86 |     await page.locator('input[name=password]').fill(PASSWORD);\n  87 |     await page.getByRole('button', { name: /sign in/i }).click();\n> 88 |     await expect(page.getByRole('heading', { name: /two-factor verification/i })).toBeVisible();\n     |                                                                                   ^\n  89 |\n  90 |     const twoFactorCode = findUser(email).twoFactorCode;\n  91 |     expect(twoFactorCode).toBeTruthy();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-flows.spec.js",
+                            "column": 83,
+                            "line": 88
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('heading', { name: /two-factor verification/i })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /two-factor verification/i })\u001b[22m\n\n\n  86 |     await page.locator('input[name=password]').fill(PASSWORD);\n  87 |     await page.getByRole('button', { name: /sign in/i }).click();\n> 88 |     await expect(page.getByRole('heading', { name: /two-factor verification/i })).toBeVisible();\n     |                                                                                   ^\n  89 |\n  90 |     const twoFactorCode = findUser(email).twoFactorCode;\n  91 |     expect(twoFactorCode).toBeTruthy();\n    at C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-flows.spec.js:88:83"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-06T04:30:09.468Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-e2e-artifacts\\adapted-flows-Getsocs-crit-680c4-n---login---2FA---dashboard\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-e2e-artifacts\\adapted-flows-Getsocs-crit-680c4-n---login---2FA---dashboard\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-e2e-artifacts\\adapted-flows-Getsocs-crit-680c4-n---login---2FA---dashboard\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\HP\\Downloads\\getsocs_production_scalability_upgrade\\getsocs\\docs\\qa-audit\\adapted-flows.spec.js",
+                        "column": 83,
+                        "line": 88
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1b87d743234cd2a8cf16-873e540d318925c788c6",
+              "file": "adapted-flows.spec.js",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "list product -> buyer purchase -> escrow -> completion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-06T04:30:18.999Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1b87d743234cd2a8cf16-28c094e5ab16c3a01426",
+              "file": "adapted-flows.spec.js",
+              "line": 97,
+              "column": 3
+            },
+            {
+              "title": "profile photo traverses browser multipart -> backend -> public upload route",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-06T04:30:19.000Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1b87d743234cd2a8cf16-f8f105c4826e5d664754",
+              "file": "adapted-flows.spec.js",
+              "line": 141,
+              "column": 3
+            },
+            {
+              "title": "identity document is private: user submits, non-admin denied, admin allowed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-06T04:30:19.000Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1b87d743234cd2a8cf16-1583e7960579faa84fc6",
+              "file": "adapted-flows.spec.js",
+              "line": 156,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-06T04:30:08.298Z",
+    "duration": 11016.377,
+    "expected": 0,
+    "skipped": 3,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

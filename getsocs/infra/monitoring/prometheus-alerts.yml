@@ -1,0 +1,54 @@
+groups:
+  - name: getsocs
+    rules:
+      - alert: GetsocsHigh5xxRate
+        expr: sum(rate(getsocs_http_requests_total{status_class="5xx"}[5m])) / clamp_min(sum(rate(getsocs_http_requests_total[5m])), 0.001) > 0.03
+        for: 5m
+        labels: { severity: page }
+        annotations: { summary: "Getsocs 5xx rate above 3% for 5 minutes" }
+      - alert: GetsocsLatencySpike
+        expr: max(getsocs_http_latency_p95_ms) > 1000
+        for: 10m
+        labels: { severity: warning }
+        annotations: { summary: "Getsocs p95 latency above 1s" }
+      - alert: GetsocsDatabaseUnavailable
+        expr: getsocs_database_up == 0
+        for: 1m
+        labels: { severity: page }
+        annotations: { summary: "Getsocs cannot reach MySQL" }
+      - alert: GetsocsRedisUnavailable
+        expr: getsocs_redis_up == 0
+        for: 5m
+        labels: { severity: warning }
+        annotations: { summary: "Getsocs Redis cache unavailable; API should be using MySQL fallback" }
+      - alert: GetsocsLowDisk
+        expr: getsocs_disk_free_bytes / getsocs_disk_total_bytes < 0.10
+        for: 10m
+        labels: { severity: page }
+        annotations: { summary: "Getsocs host filesystem below 10% free" }
+      - alert: GetsocsLowCacheHitRatio
+        expr: getsocs_cache_hits_total + getsocs_cache_misses_total > 100 and getsocs_cache_hit_ratio < 0.50
+        for: 30m
+        labels: { severity: info }
+        annotations: { summary: "Getsocs cache hit ratio below 50%; review workload and TTLs before increasing cache size" }
+      - alert: GetsocsAuthenticationErrorSpike
+        expr: sum(rate(getsocs_http_requests_total{route=~".* /api(/v1)?/auth/(login|login/verify-2fa|refresh).*",status_class=~"4xx|5xx"}[5m])) > 0.5
+        for: 10m
+        labels: { severity: warning }
+        annotations: { summary: "Authentication endpoint errors are elevated" }
+      - alert: GetsocsRedisEvictions
+        expr: increase(getsocs_redis_evicted_keys_total[15m]) > 0
+        for: 5m
+        labels: { severity: warning }
+        annotations: { summary: "Redis is evicting cache keys; validate memory sizing and hit ratio" }
+      - alert: GetsocsHighHostMemory
+        expr: getsocs_host_memory_available_bytes / getsocs_host_memory_total_bytes < 0.10
+        for: 10m
+        labels: { severity: page }
+        annotations: { summary: "Getsocs host has less than 10% free RAM" }
+      - alert: GetsocsHighHostLoad
+        expr: getsocs_host_load1 / clamp_min(getsocs_host_cpu_count, 1) > 0.90
+        for: 15m
+        labels: { severity: warning }
+        annotations: { summary: "Getsocs host load is sustained near available CPU capacity" }
+

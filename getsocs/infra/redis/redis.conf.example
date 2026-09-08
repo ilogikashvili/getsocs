@@ -1,0 +1,11 @@
+# Host-installed Redis example for the single-VPS deployment.
+# Never expose port 6379 publicly.
+bind 127.0.0.1 ::1
+protected-mode yes
+port 6379
+appendonly no
+maxmemory 256mb
+maxmemory-policy allkeys-lru
+timeout 0
+tcp-keepalive 300
+# If Redis must be reachable over private networking, use ACLs/TLS or the provider's secure managed endpoint.

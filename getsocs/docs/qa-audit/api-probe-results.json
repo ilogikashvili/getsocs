@@ -1,0 +1,55 @@
+{
+  "registration": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "requiresEmailVerification": true,
+      "email": "qaprobe@example.com",
+      "verificationSent": true,
+      "message": "Enter the verification code sent to your email to finish creating your account."
+    }
+  },
+  "verification": {
+    "status": 200,
+    "cookie": "getsocs_refresh=[redacted]; Max-Age=2592000; Path=/api/auth; Expires=Tue, 06 Oct 2026 04:33:32 GMT; HttpOnly; SameSite=Lax"
+  },
+  "versionedRefresh": {
+    "status": 401,
+    "body": {
+      "success": false,
+      "error": "Refresh token required"
+    }
+  },
+  "legacyRefresh": {
+    "status": 200
+  },
+  "unpaidMembership": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "subscription": {
+        "id": "user_mem_1788669212564",
+        "userId": "1788669212472",
+        "membershipTierId": "qa-paid",
+        "status": "active",
+        "startDate": "2026-09-06T04:33:32.553Z",
+        "endDate": "2026-10-06T04:33:32.553Z",
+        "autoRenew": true,
+        "stripeSubscriptionId": "sub_1788669212564",
+        "billingCycle": "monthly",
+        "amount": 29
+      },
+      "message": "Successfully subscribed to qa-paid tier"
+    }
+  },
+  "cors": {
+    "http://getsocs.test:3101": {
+      "status": 200,
+      "allowOrigin": "http://getsocs.test:3101"
+    },
+    "https://untrusted.example": {
+      "status": 200,
+      "allowOrigin": null
+    }
+  }
+}

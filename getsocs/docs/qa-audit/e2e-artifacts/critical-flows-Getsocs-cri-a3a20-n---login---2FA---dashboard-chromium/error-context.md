@@ -1,0 +1,74 @@
+# Page snapshot
+
+```yaml
+- main [ref=e5]:
+  - generic [ref=e6]:
+    - link "GS GETSOCS Trusted social account marketplace" [ref=e7] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e8] [cursor=pointer]: GS
+      - generic [ref=e9] [cursor=pointer]:
+        - strong [ref=e10] [cursor=pointer]: GETSOCS
+        - generic [ref=e11] [cursor=pointer]: Trusted social account marketplace
+    - generic [ref=e13]:
+      - img [ref=e15]
+      - heading "Create your account" [level=1] [ref=e19]
+      - paragraph [ref=e20]: Join us and start trading securely
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Username
+          - generic [ref=e24]:
+            - generic:
+              - img
+            - textbox "Username" [ref=e25]: browser68677204
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]: First name
+            - generic [ref=e29]:
+              - generic:
+                - img
+              - textbox "First name" [ref=e30]: Browser
+          - generic [ref=e31]:
+            - generic [ref=e32]: Last name
+            - generic [ref=e33]:
+              - generic:
+                - img
+              - textbox "Last name" [ref=e34]: User
+        - generic [ref=e35]:
+          - generic [ref=e36]: Email
+          - generic [ref=e37]:
+            - generic:
+              - img
+            - textbox "Email" [active] [ref=e38]: browser-1788668677204@example.com
+        - paragraph [ref=e39]: One account per email address. We'll send a verification code here.
+        - generic [ref=e40]:
+          - generic [ref=e41]: Password
+          - generic [ref=e42]:
+            - generic:
+              - img
+            - textbox "Password Show password" [ref=e43]
+            - button "Show password" [ref=e45] [cursor=pointer]:
+              - img [ref=e46] [cursor=pointer]
+        - paragraph [ref=e49]: Must be at least 8 characters with an uppercase letter, a number, and a symbol.
+        - generic [ref=e50] [cursor=pointer]:
+          - checkbox "I agree to the marketplace policy" [ref=e51] [cursor=pointer]
+          - generic [ref=e52] [cursor=pointer]:
+            - text: I agree to the
+            - button "marketplace policy" [ref=e53] [cursor=pointer]
+        - button "Create account" [ref=e54] [cursor=pointer]:
+          - text: Create account
+          - img [ref=e55] [cursor=pointer]
+      - paragraph [ref=e57]:
+        - text: Already have an account?
+        - link "Sign in" [ref=e58] [cursor=pointer]:
+          - /url: /login
+    - generic [ref=e59]:
+      - generic [ref=e60]:
+        - img [ref=e61]
+        - text: Escrow protected
+      - generic [ref=e64]:
+        - img [ref=e65]
+        - text: Verified listings
+      - generic [ref=e67]:
+        - img [ref=e68]
+        - text: 24/7 support
+```

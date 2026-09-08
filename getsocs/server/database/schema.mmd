@@ -1,0 +1,26 @@
+erDiagram
+    USERS ||--o{ REFRESH_TOKENS : owns
+    USERS ||--o{ PRODUCTS : sells
+    USERS ||--o{ TRANSACTIONS : buys
+    USERS ||--o{ TRANSACTIONS : sells
+    USERS ||--o{ TRANSACTIONS : manages_escrow
+    USERS ||--o{ COMMENTS : writes
+    PRODUCTS ||--o{ COMMENTS : has
+    PRODUCTS ||--o{ TRANSACTIONS : purchased_as
+    PRODUCTS ||--o{ BIDS : receives
+    USERS ||--o{ BIDS : places
+    TRANSACTIONS ||--o| ESCROW : protected_by
+    TRANSACTIONS ||--o{ CHATS : discusses
+    USERS ||--o{ SUPPORT_CHATS : opens
+    USERS ||--o{ SUPPORT_CHATS : handles
+    USERS ||--o{ SCANNED_IDS : submits
+    USERS ||--o{ NOTIFICATIONS : receives
+    USERS ||--o{ IDEMPOTENCY_KEYS : owns
+    USERS ||--o{ REVIEWS : authors
+    TRANSACTIONS ||--o{ REVIEWS : validates
+    USERS ||--o{ USER_BADGES : earns
+    BADGES ||--o{ USER_BADGES : assigned
+    USERS ||--o{ USER_MEMBERSHIPS : owns
+    MEMBERSHIPS ||--o{ USER_MEMBERSHIPS : tier
+    USERS ||--o{ USER_ADDONS : owns
+    ADDONS ||--o{ USER_ADDONS : addon
