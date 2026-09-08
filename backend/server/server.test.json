@@ -1,0 +1,12 @@
+{
+  "users": [],
+  "products": [],
+  "comments": [],
+  "transactions": [],
+  "chats": [],
+  "supportChats": [],
+  "scanned_ids": [],
+  "analytics": {
+    "pageViews": 0
+  }
+}

@@ -1,0 +1,147 @@
+.profile-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 820px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+.profile-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  color: var(--text);
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.profile-card h3:first-child {
+  margin-top: 0;
+}
+
+.profile-card h3:not(:first-child) {
+  margin-top: 24px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.profile-note {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.note-admin { background: rgba(220,53,69,0.08); color: #ffdada }
+.note-escrow { background: rgba(255,193,7,0.06); color: #fff6e6 }
+.note-user { background: rgba(34,197,94,0.06); color: #e8fff1 }
+
+.profile-row span { color: var(--muted); font-weight:600 }
+.profile-row strong { color: var(--text); font-weight:700 }
+
+/* Role Badges */
+.role-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-admin { background: linear-gradient(90deg,#b02a37,#dc3545); color: #fff }
+.role-escrow { background: linear-gradient(90deg,#f59e0b,#fbbf24); color: #111 }
+.role-user { background: linear-gradient(90deg,#10b981,#34d399); color: #04241a }
+
+/* Points Section */
+.points-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.points-card {
+  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(124,58,237,0.12));
+  color: var(--text);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.points-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(2,6,23,0.6) }
+
+.points-card.total { background: linear-gradient(135deg, rgba(240,147,251,0.12), rgba(245,87,108,0.10)) }
+
+.points-label { font-size:12px; font-weight:700; opacity:0.9; text-transform:uppercase; margin-bottom:8px }
+.points-value { font-size:26px; font-weight:800; line-height:1 }
+
+/* Buttons */
+.btn { display:inline-block; padding:10px 18px;border-radius:10px; font-weight:700 }
+.btn-secondary { background: linear-gradient(90deg,#4b5563,#6c757d); color:#fff }
+.btn-secondary:hover { transform:translateY(-2px) }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 16px;
+  }
+
+  .profile-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .points-section {
+    grid-template-columns: 1fr;
+  }
+
+  .points-value {
+    font-size: 24px;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 12px;
+  }
+
+  .profile-card h3 {
+    font-size: 16px;
+  }
+
+  .profile-row {
+    padding: 10px;
+  }
+
+  .points-value {
+    font-size: 20px;
+  }
+}
